@@ -83,11 +83,7 @@ export default SampleComponent;`;
     }
   };
 
-  const loadSample = () => {
-    setUploadedCode(sampleComponent);
-    setError('');
-    setRenderedComponent(null);
-  };
+ 
 
   const renderComponent = async () => {
     if (!uploadedCode.trim()) {
@@ -122,7 +118,7 @@ export default SampleComponent;`;
       const ComponentFunction = new Function('React', componentCode);
       const Component = ComponentFunction(React);
       
-      setRenderedComponent(<Component />);
+      setRenderedComponent(React.createElement(Component));//setRenderedComponent(<Component />);
     } catch (err) {
       setError(`Error rendering component: ${err.message}`);
       console.error('Component rendering error:', err);
@@ -559,7 +555,8 @@ export default SampleComponent;`;
               <div style={{display: 'flex', gap: '1rem', marginTop: '1.5rem'}}>
                 <button
                   onClick={renderComponent}
-                  disabled={isLoading}
+                //   disabled={isLoading}
+                disabled={true}
                   style={{
                     ...styles.button, 
                     ...styles.renderButton,
